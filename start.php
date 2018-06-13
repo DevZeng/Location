@@ -16,6 +16,7 @@ function handle_connection($connection)
     // 为这个连接分配一个uid
     $connection->connection_id = ++$connection_id;
     $connection->send('Hello'.$connection->connection_id);
+    echo $connection_id.'Connect';
 }
 
 // 当客户端发送消息过来时，转发给所有人
