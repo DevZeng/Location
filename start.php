@@ -12,6 +12,10 @@ $tcp_worker->onMessage = function($connection, $data)
     // 向客户端发送hello $data
     $connection->send('hello ' . $data);
 };
+$tcp_worker->onConnect = function ($connection)
+{
+    echo "new connection from ip " . $connection->getRemoteIp() . "\n";
+};
 
 // 运行worker
 Worker::runAll();
