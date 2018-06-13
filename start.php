@@ -9,12 +9,13 @@ $devices = array();
 // 当客户端发来数据时
 $tcp_worker->onMessage = function($connection, $data)
 {
-    $sendMessage = $data;
+//    $sendMessage = $data;
     $start= (strpos($data,"["));
     $end= (strpos($data,"]"));
     $message = substr($data,$start+1,$end-1);
     $data = explode(',',$message);
     $data = $data[0];
+    $sendMessage = '['.$data[0].']';
     $data = explode('*',$data);
 //    var_dump($data);
     $connection->send($sendMessage);
