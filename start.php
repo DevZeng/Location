@@ -12,7 +12,7 @@ $tcp_worker->onMessage = function($connection, $data)
 {
     global $db;
     $message = $data;
-    var_dump($data);
+    var_dump('date:'.date('Y-m-d H:i:s').'data:'.$message);
     $start= (strpos($message,"["));
     $end= (strpos($message,"]"));
     $message = substr($message,$start+1,$end-1);
@@ -33,6 +33,7 @@ $tcp_worker->onMessage = function($connection, $data)
                 'device_id'=>$order[1],
                 'creatime'=>date('Y-m-d H:i:s')))->query();
             $connection->send($returnMessage);
+            var_dump('sendMessage:'.$returnMessage.'to:'.$connection->getRemoteIp());
             break;
         case 'UD':
 //            if (in_array('A',$data)){
