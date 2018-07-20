@@ -33,8 +33,9 @@ $tcp_worker->onMessage = function($connection, $data)
                 'device_id'=>$order[1],
                 'creatime'=>date('Y-m-d H:i:s')))->query();
             $connection->send($returnMessage);
+            break;
         case 'UD':
-            if (in_array('A',$data)){
+//            if (in_array('A',$data)){
                 $date = '20'.$data[1].$data[2];
                 $latKey = array_search('N',$data);
                 $lat = $data[$latKey-1];
@@ -58,7 +59,9 @@ $tcp_worker->onMessage = function($connection, $data)
                     'number'=>$number,
                     'strength'=>$strength
                 ))->query();
-            }
+//            }
+
+            break;
 
     }
 };
