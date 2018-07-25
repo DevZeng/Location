@@ -71,9 +71,6 @@ $tcp_worker->onMessage = function($connection, $data)
                 'TKQ'
             ];
             $returnMessage = '['.implode('*',$returnMessage).']';
-            $insert_id = $db->insert('fb_device')->cols(array(
-                'device_id'=>$order[1],
-                'creatime'=>date('Y-m-d H:i:s')))->query();
             $connection->send($returnMessage);
             var_dump('sendMessage:'.$returnMessage.'to:'.$connection->getRemoteIp());
             break;
@@ -85,10 +82,6 @@ $tcp_worker->onMessage = function($connection, $data)
                 'TKQ2'
             ];
             $returnMessage = '['.implode('*',$returnMessage).']';
-            $insert_id = $db->insert('fb_device')->cols(array(
-                'device_id'=>$order[1],
-                'creatime'=>date('Y-m-d H:i:s')))->query();
-            $connection->send($returnMessage);
             var_dump('sendMessage:'.$returnMessage.'to:'.$connection->getRemoteIp());
             break;
 
