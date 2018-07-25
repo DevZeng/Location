@@ -37,7 +37,7 @@ $tcp_worker->onMessage = function($connection, $data)
             break;
         case 'UD':
 //            if (in_array('A',$data)){
-                $date = '20'.substr($data[1],4,2).'-'.substr($data[1],2,2).'-'.substr($data[1],0,2).' '.substr($data[2],0,2).':'.substr($data[2],2,2).':'.substr($data[2],4,2);
+                $date = '20'.substr($data[1],4,2).'-'.substr($data[1],2,2).'-'.substr($data[1],0,2).' '.(substr($data[2],0,2)+8).':'.substr($data[2],2,2).':'.substr($data[2],4,2);
                 $latKey = array_search('N',$data);
                 $lat = $data[$latKey-1];
                 $lngKey = array_search('E',$data);
