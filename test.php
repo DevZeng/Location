@@ -18,8 +18,8 @@
 //var_dump($lat);
 //var_dump($lat);
 //var_dump(dechex(40582974));
-$key = "maiker";
-$b = array_map('ord', str_split($key, 1));
-$s = join('', array_map('chr', $b));
-var_dump($b);
-var_dump($s);
+$string = "cb....q9";
+//$string = chr($string);
+//var_dump($string);
+$string = bin2hex($string);
+var_dump($string);
