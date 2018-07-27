@@ -11,8 +11,12 @@ $devices = array();
 $tcp_worker->onMessage = function($connection, $data)
 {
     global $db;
-    $message = $data;
-    print $data;
+    $message = '';
+    foreach($data as $ch) {
+        $message .= chr($ch);
+    }
+    var_dump($message);
+//    print $data;
 //    var_dump('date:'.date('Y-m-d H:i:s').'data:'.$message);
 };
 $tcp_worker->onConnect = function ($connection)
