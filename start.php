@@ -12,7 +12,7 @@ $tcp_worker->onMessage = function($connection, $data)
 {
     global $db;
     $message = '';
-    var_dump($data);
+    var_dump( stream_get_contents('php://input', 'r'));
     if (!empty($data)){
         foreach($data as $ch) {
             $message .= chr($ch);
