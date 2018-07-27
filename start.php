@@ -12,13 +12,16 @@ $tcp_worker->onMessage = function($connection, $data)
 {
     global $db;
     $message = '';
-    var_dump( file_get_contents('php://input', 'r'));
+    var_dump($data);
+
+//    var_dump()
+//    var_dump( file_get_contents('php://input', 'r'));
     if (!empty($data)){
         foreach($data as $ch) {
             $message .= chr($ch);
         }
     }
-    var_dump($message);
+//    var_dump($message);
 //    print $data;
 //    var_dump('date:'.date('Y-m-d H:i:s').'data:'.$message);
 };

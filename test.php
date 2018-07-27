@@ -18,7 +18,7 @@
 //var_dump($lat);
 //var_dump($lat);
 //var_dump(dechex(40582974));
-$string = "cb....q9";
+$string = "xx.i..'..5..w...$...Z&.6`.... T..3.~F]..+.E8V@..?..V.%....Y.U.h..D....&..eF&./7F&..HF&./8F&..4F&..gP&..IP";
 //$string = chr($string);
 //var_dump($string);
 $string = bin2hex($string);
