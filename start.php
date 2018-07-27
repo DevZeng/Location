@@ -14,13 +14,19 @@ $tcp_worker->onMessage = function($connection, $data)
     $message = '';
     var_dump($data);
 
+
+    var_dump(bin2hex($data));
+
+
+//    var_dump()
+
 //    var_dump()
 //    var_dump( file_get_contents('php://input', 'r'));
-    if (!empty($data)){
-        foreach($data as $ch) {
-            $message .= chr($ch);
-        }
-    }
+//    if (!empty($data)){
+//        foreach($data as $ch) {
+//            $message .= chr($ch);
+//        }
+//    }
 //    var_dump($message);
 //    print $data;
 //    var_dump('date:'.date('Y-m-d H:i:s').'data:'.$message);
