@@ -12,7 +12,7 @@ $tcp_worker->onMessage = function($connection, $data)
 {
     global $db;
     $message = $data;
-    var_dump($data);
+    print $data;
     var_dump('date:'.date('Y-m-d H:i:s').'data:'.$message);
 };
 $tcp_worker->onConnect = function ($connection)
