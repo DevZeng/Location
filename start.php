@@ -49,6 +49,7 @@ $tcp_worker->onMessage = function($connection, $data)
             $height = 0;
             $number = 0;
             $strength = 0;
+            $addressString = '';
             $gpsData = $originData[2];
             $gpsData = explode(':',$gpsData);
             $gpsData = $gpsData[1];
@@ -94,6 +95,7 @@ $tcp_worker->onMessage = function($connection, $data)
                     if ($return->errcode===0){
                         $lat = $return->lat;
                         $lng = $return->lon;
+                        $addressString = $return->address;
                     }
                 }
             }
@@ -107,7 +109,8 @@ $tcp_worker->onMessage = function($connection, $data)
                 'battery'=>$battery,
                 'height'=>$height,
                 'number'=>$number,
-                'strength'=>$strength
+                'strength'=>$strength,
+                'address'=>$addressString
 
             ))->query();
             break;
