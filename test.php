@@ -82,6 +82,7 @@ switch ($orderCode){
                 $return = curl_exec ( $ch );
                 curl_close ( $ch );
                 $return = json_decode($return);
+                var_dump($return);
                 if ($return->errcode===0){
                     $lat = $return->lat;
                     $lng = $return->lon;

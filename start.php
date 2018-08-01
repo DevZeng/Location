@@ -11,7 +11,7 @@ $devices = array();
 $tcp_worker->onMessage = function($connection, $data)
 {
     global $db;
-    $url = 'http://api.cellocation.com:81/wifi/?mac=%s&output=json';
+    $url = 'http://api.cellocation.com:81/wifi/?mac=%s&output=json&coord=gcj02';
     $message = $data;
     $data = explode('#',$message);
     var_dump($data);
