@@ -124,7 +124,8 @@ $tcp_worker->onMessage = function($connection, $data)
                     'height'=>$height,
                     'number'=>$number,
                     'strength'=>$strength,
-                    'address'=>$addressString
+                    'address'=>$addressString,
+                    'cteation_time'=>date('Y-m-d H:i:s',time())
                 ))->query();
             }
             break;
