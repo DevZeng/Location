@@ -12,6 +12,7 @@ $tcp_worker->onMessage = function($connection, $data)
 {
     global $db;
     $url = 'http://api.cellocation.com:81/wifi/?mac=%s&output=json&coord=gcj02';
+    $wechatUrl = 'https://apis.map.qq.com/ws/geocoder/v1/?location=%s,%s&get_poi=1&key=33UBZ-ICQKP-W6FDW-V54Q6-OY542-IZFJ4';
     $message = $data;
     $data = explode('#',$message);
     var_dump($data);
@@ -56,7 +57,7 @@ $tcp_worker->onMessage = function($connection, $data)
             $gpsData = explode(',',$gpsData);
             $lat = $gpsData[3];
             $lng = $gpsData[4];
-            $locationTime = strtotime('20'.$gpsData[2]);
+            //$locationTime = strtotime('20'.$gpsData[2]);
             $speed = $gpsData[5];
             $direction = $gpsData[6];
             $height = $gpsData[7];
@@ -99,20 +100,33 @@ $tcp_worker->onMessage = function($connection, $data)
                     }
                 }
             }
-            $insert_id = $db->insert('fb_device_status')->cols(array(
-                'device_id'=>$device_id,
-                'lat'=>$lat,
-                'lag'=>$lng,
-                'location_time'=>$locationTime,
-                'speed'=>$speed,
-                'direction'=>$direction,
-                'battery'=>$battery,
-                'height'=>$height,
-                'number'=>$number,
-                'strength'=>$strength,
-                'address'=>$addressString
-
-            ))->query();
+            if ($lat!=0){
+                if ($addressString==''){
+                    $ch = curl_init ();
+                    curl_setopt ( $ch, CURLOPT_URL, sprintf($wechatUrl,$lat,$lng) );
+                    curl_setopt ( $ch, CURLOPT_POST, 0 );
+                    curl_setopt ( $ch, CURLOPT_HEADER, 0 );
+                    curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, 1 );
+                    curl_setopt ($ch, CURLOPT_HTTPHEADER, array("Expect:"));
+                    $return = curl_exec ( $ch );
+                    curl_close ( $ch );
+                    $return = json_decode($return);
+                    $addressString = $return->result->address;
+                }
+                $insert_id = $db->insert('fb_device_status')->cols(array(
+                    'device_id'=>$device_id,
+                    'lat'=>$lat,
+                    'lag'=>$lng,
+                    'location_time'=>$locationTime,
+                    'speed'=>$speed,
+                    'direction'=>$direction,
+                    'battery'=>$battery,
+                    'height'=>$height,
+                    'number'=>$number,
+                    'strength'=>$strength,
+                    'address'=>$addressString
+                ))->query();
+            }
             break;
 
     }
