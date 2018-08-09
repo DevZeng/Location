@@ -100,6 +100,8 @@ $tcp_worker->onMessage = function($connection, $data)
                     }
                 }
             }
+            var_dump($lat!=0);
+            var_dump($lat);
             if ($lat!=0){
                 if ($addressString==''){
                     $ch = curl_init ();
