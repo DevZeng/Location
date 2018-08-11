@@ -103,6 +103,7 @@ $tcp_worker->onMessage = function($connection, $data)
             var_dump($lat!=0);
             var_dump($lat);
             if ($data[1]=='358511025621274'||$data[1]=='358511029680476'){
+                var_dump($return);
                 $insertData = array(
                     'device_id'=>$device_id,
                     'lat'=>$lat,
