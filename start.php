@@ -82,21 +82,26 @@ $tcp_worker->onMessage = function($connection, $data)
                 $wifiData = $wifiData[1];
                 $wifiData = explode(',',$wifiData);
                 if ($wifiData[0]!=0){
-                    $address = $wifiData[1];
-                    $address = str_replace('-',':',$address);
-                    $ch = curl_init ();
-                    curl_setopt ( $ch, CURLOPT_URL, sprintf($url,$address) );
-                    curl_setopt ( $ch, CURLOPT_POST, 0 );
-                    curl_setopt ( $ch, CURLOPT_HEADER, 0 );
-                    curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, 1 );
-                    curl_setopt ($ch, CURLOPT_HTTPHEADER, array("Expect:"));
-                    $return = curl_exec ( $ch );
-                    curl_close ( $ch );
-                    $return = json_decode($return);
-                    if ($return->errcode===0){
-                        $lat = $return->lat;
-                        $lng = $return->lon;
-                        $addressString = $return->address;
+                    $count = count($wifiData);
+                    for ($i=0;$i<$count;$i++){
+                        if ($i%2==1){
+                            $address = str_replace('-',':',$wifiData[$i]);
+                            $ch = curl_init ();
+                            curl_setopt ( $ch, CURLOPT_URL, sprintf($url,$address) );
+                            curl_setopt ( $ch, CURLOPT_POST, 0 );
+                            curl_setopt ( $ch, CURLOPT_HEADER, 0 );
+                            curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, 1 );
+                            curl_setopt ($ch, CURLOPT_HTTPHEADER, array("Expect:"));
+                            $return = curl_exec ( $ch );
+                            curl_close ( $ch );
+                            $return = json_decode($return);
+                            if ($return->errcode===0){
+                                $lat = $return->lat;
+                                $lng = $return->lon;
+                                $addressString = $return->address;
+                                break;
+                            }
+                        }
                     }
                 }
             }
