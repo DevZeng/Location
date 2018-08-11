@@ -102,6 +102,30 @@ $tcp_worker->onMessage = function($connection, $data)
             }
             var_dump($lat!=0);
             var_dump($lat);
+            if ($data[1]=='358511025621274'||$data[1]=='358511029680476'){
+                $insertData = array(
+                    'device_id'=>$device_id,
+                    'lat'=>$lat,
+                    'lag'=>$lng,
+                    'location_time'=>$locationTime,
+                    'speed'=>$speed,
+                    'direction'=>$direction,
+                    'battery'=>$battery,
+                    'height'=>$height,
+                    'number'=>$number,
+                    'strength'=>$strength,
+                    'address'=>$addressString,
+                    'cteation_time'=>date('Y-m-d H:i:s',time()));
+                $handle = fopen('log.txt','a+');
+                fwrite($handle,"originData:"."\n");
+                fwrite($handle,var_export($data,true));
+                fwrite($handle,"\n"."returnData:"."\n");
+                fwrite($handle,var_export($return,true));
+                fwrite($handle,"\n"."insertData:"."\n");
+                fwrite($handle,var_export($insertData,true));
+                fclose($handle);
+            }
+
             if ($lat!=0){
                 if ($addressString==''){
                     $ch = curl_init ();
